@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "homepage": "https://mriganksmac.github.io/accts",
+  "homepage": "https://mrigankswork.github.io/accts",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
