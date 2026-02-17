@@ -2,6 +2,7 @@ import { useState, useRef } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { solveQuestion, readFileAsBase64, readFileAsText } from '../utils/gemini.js';
+import { exportSolutionAsDocx } from '../utils/exportDocx.js';
 
 export default function Solver() {
     const [inputMode, setInputMode] = useState('text');
@@ -12,6 +13,7 @@ export default function Solver() {
     const [loading, setLoading] = useState(false);
     const [solution, setSolution] = useState(null);
     const [error, setError] = useState('');
+    const [exporting, setExporting] = useState(false);
     const fileInputRef = useRef(null);
     const cameraInputRef = useRef(null);
     const galleryInputRef = useRef(null);
@@ -237,6 +239,17 @@ export default function Solver() {
                         <h2 style={{ fontSize: '1.2rem', fontWeight: 700, color: 'var(--text-accent)' }}>
                             📝 Solution
                         </h2>
+                        <button
+                            className="btn btn-success btn-sm"
+                            disabled={exporting}
+                            onClick={async () => {
+                                setExporting(true);
+                                try { await exportSolutionAsDocx(solution); } catch (e) { setError('Failed to export DOCX'); }
+                                setExporting(false);
+                            }}
+                        >
+                            {exporting ? '⏳ Exporting...' : '📥 Download DOCX'}
+                        </button>
                     </div>
 
                     {solution.topic && (
