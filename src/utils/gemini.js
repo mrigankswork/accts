@@ -9,7 +9,7 @@ const MODELS = [
 ];
 
 // Default API key (user can change in settings)
-const DEFAULT_KEY = 'AIzaSyAO9RNEwlpWVo7-sQbBUBUBEIh7BPfEq5Q';
+const DEFAULT_KEY = 'AIzaSyAO9RNEwlpWVo7-sQbBUBEIh7BPfEq5Q';
 
 export function getApiKey() {
     return localStorage.getItem('acctbot_api_key') || DEFAULT_KEY;
